@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+	<h1>Ejercicio sencillo 2: Concatenar 2 Arrays</h1>
+
+<p>Introduce los primeros enteros separados por comas</p>
+
+<input type="text" id="ejemplo1">
+<input type="button" value="Ejemplo1" onclick="ejemplo1()">
+
+<p>Introduce los segundos enteros separados por comas</p>
+
+<input type="text" id="ejemplo2">
+<input type="button" value="Ejemplo2" onclick="ejemplo2()">
+
+<p><input type="button" value="Concatenar" onclick="concatenar()"></p>
+
+<input type="button" value="Reiniciar" onclick="Reiniciar()">
+
+<p id="resultado"></p>
+
+
+
+
+
+
+</body>
+<script type="text/javascript">
+
+let lista1=[]
+let lista2=[]
+
+	function ejemplo1(){
+	let ejemploUno =document.getElementById('ejemplo1').value.split(/,/);
+		
+		lista1.push(ejemploUno)
+		
+	}
+
+	function ejemplo2(){
+		let ejemploDos=document.getElementById('ejemplo2').value.split(/,/);
+		lista2.push(ejemploDos)
+	}
+
+let conca=[]
+	function concatenar(){
+		
+		 var array1=document.getElementById("ejemplo1").value.split(/,/);
+    	var array2=document.getElementById("ejemplo2").value.split(/,/);
+
+for (i=0;i<array1.length;i++) {
+	conca.push(array1[i]);
+	conca.push(array2[i]);
+}
+
+		document.getElementById('resultado').textContent="los 2 ejemplos concatenados "+conca
+	}
+
+</script>
+
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+
+</head>
+<body>
+<input type="date" id="fecha" name="e">
+<button type="button" id="boton" onclick="cal()"  >gaaaa</button>
+<p id="prueba"></p>
+</body>
+<script type="text/javascript">
+	
+
+/* CALCULAR EDAD
+	function cal(){
+	 var anios = document.getElementById('prueba');
+	 var ee=document.getElementById('fecha').value;
+    var cumpleanios = document.getElementById('fecha').value;
+    ee = new Date(ee);
+    diaDehoy = new Date()
+    aniostotal = Date.now() - ee.getTime();
+    anioss = new Date(aniostotal);
+    anioss = Math.abs(anioss.getUTCFullYear() - 1970 );
+	anios.innerHTML= anioss
+
+
+	
+}
+ */
+
+
+ function cal(){
+    let fecha= document.getElementById('fecha').value;
+   let hoy = new Date();
+    let cumple=new Date(fecha.getFullYear())
+
+    let milisegundosDia=1000*60*60*24;
+
+    let cantidadDias=Math.ceil((cumple.getTime() - hoy.getTime())/milisegundosDia);
+
+
+    document.getElementById('prueba').innerHTML= cantidadDias
+
+ }
+
+
+
+</script>
+</html>

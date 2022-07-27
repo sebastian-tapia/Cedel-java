@@ -1,0 +1,149 @@
+
+<!-- saved from url=(0063)https://www.uv.es/mplac/LaNau/4_Javascript/Ejercicios/array.htm -->
+<html><script async="false" type="text/javascript" src="chrome-extension://fnjhmkhhmkbjkkabndcnnogagogbneec/in-page.js"></script><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Arrays</title>
+
+<style type="text/css">
+	.listElement {
+		margin:5px 0px;
+	}
+
+	.listElement:hover {
+		cursor: pointer;
+	}
+</style>
+
+<script language="JavaScript">
+
+	// inicializo el objeto
+	let persons = [
+	    {
+	    	name:"Juan",
+	    	lastName:"Perez",
+	    	age:34
+	    },
+	    {
+	    	name:"Laura",
+	    	lastName:"Rodriguez",
+	    	age:45
+	    },
+	    {
+	    	name:"Juana",
+	    	lastName:"Garabal",
+	    	age:24
+	    }
+    ];
+
+    function addToHTML(name,lastName,age,position){
+    	var newPersonPosition = position;
+
+    	let lista = document.querySelector("#result");  
+    	let li = document.createElement("li");
+    	li.setAttribute('class','listElement');
+    	li.setAttribute('onclick','loadPerson('+newPersonPosition+');');
+    	
+    	if (newPersonPosition){
+	    	li.setAttribute('personPosition', newPersonPosition);
+	    }
+
+        li.textContent = name + " " + lastName + ": " + age +" años";
+        lista.appendChild(li);
+    }
+
+    function updateHTML(innerHTML,index){
+    	var ul = document.getElementById('result');
+	    var li = ul.getElementsByTagName('li');
+
+	    var updateableItem = li[index];
+
+	    // now put this value into the li tag by setting the .innerHTML
+	    updateableItem.innerHTML = innerHTML;
+    }
+
+    // inicializo la variable de control de índice
+    var currentIndex;
+
+    // función para agregar a una persona
+    function savePerson(index){
+
+    	// tomo datos de formulario
+    	var personName = document.newPerson.name.value;
+    	var personLastName = document.newPerson.lastName.value;
+    	var personAge = document.newPerson.age.value;
+
+    	// limpio formulario
+    	document.newPerson.name.value = "";
+    	document.newPerson.lastName.value = "";
+    	document.newPerson.age.value = "";
+
+    	if (index >= 0){
+    		// guardo la persona editada de acuerdo a su index
+    		persons[index].name = personName;
+    		persons[index].lastName = personLastName;
+    		persons[index].age = personAge;
+
+    		updateableContent = personName + " " + personLastName + ": " + personAge +" años";
+
+    		updateHTML(updateableContent,index); 
+    	} else {
+	    	//agrego personas al objeto
+    		persons.push({name:personName,lastName:personLastName,age:personAge});
+
+    		var newPersonPosition = persons.length - 1;
+
+    		addToHTML(personName,personLastName,personAge,newPersonPosition);
+
+    		console.log(newPersonPosition);
+
+    	}
+
+    	return persons;
+
+    }
+
+    function loadPerson(index){
+    	currentIndex = index;
+
+    	document.newPerson.name.value = persons[index].name;
+    	document.newPerson.lastName.value = persons[index].lastName;
+    	document.newPerson.age.value = persons[index].age;
+
+    }
+
+    function loadExisting(){
+
+	    for (let i = 0; i < persons.length; i++) {
+	    	console.log(i);
+	    	addToHTML(persons[i].name,persons[i].lastName,persons[i].age,i);
+	    	console.log(persons[i].name);
+	    }
+
+	    return persons;
+	}
+
+    window.onload = loadExisting;
+
+
+</script>
+</head>
+<body data-new-gr-c-s-check-loaded="14.1062.0" data-gr-ext-installed="" data-new-gr-c-s-loaded="14.1062.0">
+<center>
+<h1>Nueva Persona</h1>
+<form name="newPerson">
+<label for="name">Nombre:</label>
+<input type="text" id="name" name="name" required></input>
+<label for="lastName">Apellido:</label>
+<input type="text" id="lastName" name="lastName"required></input>
+<label for="age">Edad:</label>
+<input type="number" id="age" name="age" required></input>
+<br><br>
+<input type="button" value="Guardar" name="save" onclick="savePerson(currentIndex)">
+</form>
+<div style="text-align: left;width: 100%;display: flex;justify-content: center;maring-top:50px;padding: 25px 20px; border: 1px solid green;">
+	<ul id="result" style="margin: 0 auto;">  
+    </ul> 
+</div>
+</center>
+
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>

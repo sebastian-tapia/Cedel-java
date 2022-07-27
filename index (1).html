@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>asda</title>
+<style>
+#caja1{
+	display: flex;
+	
+	align-items: center;
+	flex-direction: column;
+	
+}
+</style>
+</head>
+
+<body>
+
+        
+            <div id="caja1">
+                	<h1>Contador </h1>
+            
+           	 		<button id="btnClick" onclick="contador()">Cuenta</button>
+				
+            	<p>El valor actual del contador es <span id="contarClick"></span></p>
+				<button id="reset" onclick="resetCounter()" >Reset</button>
+        	</div>
+   
+    <script type="text/javascript">
+var counter=0
+var   pElm = document.getElementById('contarClick')
+	pElm.textContent = 0;
+function contador(){
+	let original=counter
+	let increment=++counter 
+
+	
+	alert('El contador de veces que presionaste el botón estaba en '+ original+' ,ahora se encuentra en '
+		+ increment )
+pElm.textContent = counter;
+};
+
+function resetCounter(){
+if (confirm("Quieres resetear?")==true) {
+	pElm.textContent = 0;
+	counter=0
+	
+	alert('“Confirmaste la operación. El contador volverá a 0”')
+}else{alert('Cancelaste el reseteo. El contador se mantiene en '+counter)}
+}      
+		   
+
+  
+     
+    </script>
+</body>
+</html>

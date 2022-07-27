@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>Calculadora</title>
+    <style rel="stylesheet" href="style.css" ></style>
+</head>
+<body>
+    <div id="calculadora">
+    <div id="appBg"> 
+        <form name="calculator">
+            <input type="textfield" name="ans" value="" autocomplete="off" readonly >
+            	<br>
+                <input type="button" value="7" onclick="document.calculator.ans.value+='7'">
+                <input type="button" value="8" onclick="document.calculator.ans.value+='8'">
+                <input type="button" value="9" onclick="document.calculator.ans.value+='9'">
+                <input type="button" value="+" onclick="document.calculator.ans.value+='+'">
+                <br>
+                <input type="button" value="4" onclick="document.calculator.ans.value+='4'">
+                <input type="button" value="5" onclick="document.calculator.ans.value+='5'">
+                <input type="button" value="6" onclick="document.calculator.ans.value+='6'">
+                <input type="button" value="-" onclick="document.calculator.ans.value+='-'">
+                <br>
+                <input type="button" value="1" onclick="document.calculator.ans.value+='1'">
+                <input type="button" value="2" onclick="document.calculator.ans.value+='2'">
+                <input type="button" value="3" onclick="document.calculator.ans.value+='3'">
+                <input type="button" value="x" onclick="document.calculator.ans.value+='*'">
+                <br>
+                <input type="button" value="0" onclick="document.calculator.ans.value+='0'">
+                <input type="reset" value="c">
+                <input type="button" value="=" onclick="igual()" onclick="document.calculator.ans.value=eval(document.calculator.ans.value)">
+                <input type="button" value="/" onclick="document.calculator.ans.value+='/'">
+                <br>
+        </form> 
+    </div> 
+    <div id="botoon">
+    <ul id="lista">
+
+    </ul>
+    <button onclick="borrar()">Borrar</button>
+</div>
+</div>   
+<script type="text/javascript">
+
+    
+function igual(){
+ 
+    let listaa=document.getElementById('lista');
+    let history=document.createElement('li'); 
+    let resultado=eval(document.calculator.ans.value);  
+    if (confirm("El resultado de su operación es "+resultado+", desea guardarlo en el historial?") == true){
+        
+     history.textContent=resultado
+     listaa.appendChild(history)
+        
+                
+     }
+}
+
+
+
+
+
+</script>
+</body>
+</html>

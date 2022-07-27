@@ -1,0 +1,296 @@
+
+<!-- saved from url=(0063)https://www.uv.es/mplac/LaNau/4_Javascript/Ejercicios/array.htm -->
+<html>
+<head>
+	<meta charset = "utf-8"> 
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Agenda de edades</title>
+
+<style type="text/css">
+
+	body {
+		margin: 0px;
+	}
+
+	#mainContainer {
+		 display: flex;
+		 width: 100%;
+		 min-height: 100vh;
+	}
+
+	#mainContainer>div {
+		padding:25px 30px;
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		justify-content: start;
+	}
+
+	#leftPane {
+	}
+
+	#formContainer input {
+		width: 100%;
+		background-color: transparent;
+		border: none;
+		border-bottom: 1px solid gray;
+		padding: 10px 5px 5px;
+	}
+
+	#formContainer input:focus {
+		outline: none;
+		border: none;
+		border-bottom: 1px solid gray !important;
+	}
+
+	#formContainer form>div {
+		margin-bottom: 10px;
+	}
+
+	#saveButton input {
+		margin-top: 15px;
+		background-color: #eeeeee;
+		border-radius: 5px;
+	}
+
+	#saveButton input:hover {
+		cursor: pointer;
+		background-color: #dcedc8;
+	}
+
+	#rightPane {
+		border: 1px solid green;
+		flex-grow: 1;
+		display: flex;
+		align-items: stretch;
+	}
+
+	#listContainer {
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		background-color: #f5f5f5;
+		flex-grow: 1;
+		border: 1px solid grey;
+		border-radius: 15px;
+		border-top-right-radius: 15px;
+		border-top-left-radius: 15px;
+	}
+
+	#listHeader {
+		display: flex;
+		justify-content: start;
+		padding: 10px 20px;
+		border-bottom: 1px solid #9e9e9e;
+	}
+
+	#listContainer .column {
+		width:25%;
+		display: flex;
+		justify-content: start;
+	}
+
+	#result {
+		margin-top: 0px;
+		padding-left: 0px;
+	}
+
+	#result li {
+		list-style: none;
+		display: flex;
+	}
+
+	#result li:hover {
+		background-color: #e6ee9c;
+		cursor: pointer;
+		border: 1px solid #d4e157;
+	}
+
+	.listElement {
+		border: 1px solid transparent;
+		border-bottom: 1px dotted #9e9e9e !important;
+		padding:20px 20px;
+	}
+
+</style>
+
+<script language="JavaScript">
+
+	// inicializo el objeto
+	let persons = [
+	    {
+	    	name:"Juan",
+	    	lastName:"Perez",
+	    	age:34
+	    },
+	    {
+	    	name:"Laura",
+	    	lastName:"Rodriguez",
+	    	age:45
+	    },
+	    {
+	    	name:"Juana",
+	    	lastName:"Garabal",
+	    	age:24
+	    }
+    ];
+    
+
+
+ 
+    function addToHTML(name,lastName,age,position){
+    
+ 
+
+    	var newPersonPosition = position;
+    	var personAge = document.newPerson.age.value;
+    	let lista = document.querySelector("#result");  
+    	let li = document.createElement("li");
+    	li.setAttribute('class','listElement');
+    	li.setAttribute('onclick','loadPerson('+newPersonPosition+');');
+    	
+    	 var anios = document.getElementById('prueba');
+    var cumpleanios = document.getElementById('age').value;
+    cumpleanios = new Date(cumpleanios);
+    diaDehoy = new Date()
+    aniostotal = Date.now() - cumpleanios.getTime();
+    anioss = new Date(aniostotal);
+    anioss = Math.abs(anioss.getUTCFullYear() - 1970 );
+    	if (newPersonPosition){
+	    	li.setAttribute('personPosition', newPersonPosition);
+	    }
+
+        li.innerHTML =  "<div class='column'>" + name + "</div> <div class='column'>" + lastName + "</div> <div class='column'>" + age +"</div><div  id='prueba' class='column'>" +anioss +"</div> 	<div class='column'><button>Editar</button></div>";
+        lista.appendChild(li);
+    }
+
+    function updateHTML(innerHTML,index){
+    	var ul = document.getElementById('result');
+	    var li = ul.getElementsByTagName('li');
+
+	    var updateableItem = li[index];
+
+	    // now put this value into the li tag by setting the .innerHTML
+	    updateableItem.innerHTML = innerHTML;
+    }
+
+    // inicializo la variable de control de �ndice
+    var currentIndex;
+
+
+
+
+    // funci�n para agregar a una persona
+    function savePerson(index){
+
+    	// tomo datos de formulario
+    	var personName = document.newPerson.name.value;
+    	var personLastName = document.newPerson.lastName.value;
+    	var personAge = document.newPerson.age.value;
+    	
+
+
+
+
+    	if(personName===""	||	personLastName===""){
+    		alert("Llenar el formulario!")
+    		return;
+    	}
+
+    	// limpio formulario
+    	document.newPerson.name.value = "";
+    	document.newPerson.lastName.value = "";
+    	document.newPerson.age.value = "";
+
+    	if (index >= 0 ){
+    		// guardo la persona editada de acuerdo a su index
+    		persons[index].name = personName;
+    		persons[index].lastName = personLastName;
+    		persons[index].age = personAge;
+			
+    		updateableContent = "<div class='column'>" + personName + "</div> <div class='column'>" + personLastName + "</div> <div class='column'>" + personAge +"</div><div class='column'>" + personAge +"</div> 	<div class='column'><button>Editar</button></div>";
+
+    		updateHTML(updateableContent,index); 
+    	} else {
+	    	//agrego personas al objeto
+    		persons.push({name:personName,lastName:personLastName,age:personAge});
+
+    		var newPersonPosition = persons.length - 1;
+
+    		addToHTML(personName,personLastName,personAge,newPersonPosition);
+
+    		console.log(newPersonPosition);
+
+    	}
+
+    	return persons;
+
+    }
+
+
+    function loadPerson(index){
+    	currentIndex = index;
+
+    	document.newPerson.name.value = persons[index].name;
+    	document.newPerson.lastName.value = persons[index].lastName;
+    	document.newPerson.age.value = persons[index].age;
+
+    }
+
+    function loadExisting(){
+
+	    for (let i = 0; i < persons.length; i++) {
+	    	console.log(i);
+	    	addToHTML(persons[i].name,persons[i].lastName,persons[i].age,i);
+	    	console.log(persons[i].name);
+	    }
+
+	    return persons;
+	}
+
+    window.onload = loadExisting;
+
+
+</script>
+</head>
+<body>
+	<div id="mainContainer">
+		<div id="leftPane">
+			<div class="sectionTitle">
+				<h1 id="caca" >Nuevo Contacto</h1>
+			</div>
+			<div id="formContainer">
+				<form name="newPerson">
+					<div id="nameField">
+						<input type="text" id="name" name="name" placeholder="Nombre" required></input>
+					</div>
+					<div id="lastNameField">
+						<input type="text" id="lastName" name="lastName" placeholder="Apellido" required></input>
+					</div>
+					<div id="ageField">
+						<input type="date" id="age" name="phone" placeholder="Edad" required></input>
+					</div>
+					<div id="saveButton">
+						<input type="button"  value="Guardar" name="save" onclick="savePerson(currentIndex)" required>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div id="rightPane">
+			<div class="sectionTitle">
+				<h1>Agenda</h1>
+			</div>
+			<div id="listContainer">
+				<div id="listHeader">
+					<div class="column"><span>Nombre</span></div>
+					<div class="column"><span>Apellido</span></div>
+					<div class="column"><span>Fecha N.</span></div>
+					<div class="column"><span>edad</span></div>
+					<div class="column"><span>Acciones</span></div>
+				</div>
+				<ul id="result">  
+			    </ul>
+			</div>
+		</div>
+	</div>
+</body>
